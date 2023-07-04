@@ -159,10 +159,7 @@ static void led_toggle_task(void *pvParameters) // uses around 20 words stack de
 
     // control should reach here, if reached delete task to avoid
     // undefined behaviours
-    if (NULL_PTR != gl_TaskHandle_led_toggle_task)
-    {
-        vTaskDelete(gl_TaskHandle_led_toggle_task);
-    }
+    vTaskDelete(NULL); // delete self
 }
 
 
