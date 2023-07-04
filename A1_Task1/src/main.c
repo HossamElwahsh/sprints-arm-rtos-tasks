@@ -134,12 +134,12 @@ int main( void )
  * @param[in]   pvParameters    :   Task Parameters
  *
  */
-static void led_toggle_task(void *pvParameters)
+static void led_toggle_task(void *pvParameters) // uses around 20 words stack depth
 {
-	 UBaseType_t uxHighWaterMark;
+	 volatile UBaseType_t uxHighWaterMark;
 
 	/* Inspect our own high water mark on entering the task. */
-	//uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
+	uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
 	
 	
     /* Task Loop */
@@ -149,14 +149,12 @@ static void led_toggle_task(void *pvParameters)
         GPIO_write(LED_PORT, LED_PIN, PIN_IS_HIGH);
         vTaskDelay(1000); // delay task for 1 second
 			
-			
-				//uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
-			
 				// Turn led off
         GPIO_write(LED_PORT, LED_PIN, PIN_IS_LOW);
         vTaskDelay(1000); // delay task for 1 second
 			
-		
+				uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
+			
     }
 
     // control should reach here, if reached delete task to avoid
