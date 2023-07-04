@@ -500,6 +500,11 @@
               <FileType>1</FileType>
               <FilePath>.\src\serial.c</FilePath>
             </File>
+            <File>
+              <FileName>std.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\lib\std.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -998,6 +1003,11 @@
               <FileName>serial.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\serial.c</FilePath>
+            </File>
+            <File>
+              <FileName>std.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\lib\std.h</FilePath>
             </File>
           </Files>
         </Group>

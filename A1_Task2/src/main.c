@@ -65,6 +65,7 @@
 #include "serial.h"
 #include "GPIO.h"
 
+#include "std.h"
 
 /*-----------------------------------------------------------*/
 
@@ -75,12 +76,37 @@
 #define mainCOM_TEST_BAUD_RATE	( ( unsigned long ) 115200 )
 
 
+/* Macros */
+// LED Ports
+#define LED_1_PORT PORT_0
+#define LED_2_PORT PORT_0
+#define LED_3_PORT PORT_0
+
+// LED Pins 
+#define LED_1_PIN		PIN1
+#define LED_2_PIN		PIN2
+#define LED_3_PIN		PIN3
+
+// LED Delays
+#define LED_1_DELAY	100
+#define LED_2_DELAY	500
+#define LED_3_DELAY	1000
+
+/* Private Types */
+typedef struct
+{
+	portX_t 	portX_led_port;
+	pinX_t		pinX_led_pin;
+	uint16_t 	uint16_delay;
+}st_led_task_param_t;
+
 /*
  * Configure the processor for use with the Keil demo board.  This is very
  * minimal as most of the setup is managed by the settings in the project
  * file.
  */
 static void prvSetupHardware( void );
+static void led_toggle_task(void * pvParameters);
 /*-----------------------------------------------------------*/
 
 
@@ -90,12 +116,63 @@ static void prvSetupHardware( void );
  */
 int main( void )
 {
+	// tasks parameters
+	st_led_task_param_t st_l_led_1_params = 
+	{
+		LED_1_PORT,
+		LED_1_PIN,
+		LED_1_DELAY
+	};
+	
+	st_led_task_param_t st_l_led_2_params = 
+	{
+		LED_2_PORT,
+		LED_2_PIN,
+		LED_2_DELAY
+	};
+  
+	st_led_task_param_t st_l_led_3_params = 
+	{
+		LED_3_PORT,
+		LED_3_PIN,
+		LED_3_DELAY
+	}; 
+	
 	/* Setup the hardware for use with the Keil demo board. */
 	prvSetupHardware();
-
 	
-    /* Create Tasks here */
-
+  /* Create Tasks here */
+	// Led 1 task
+	xTaskCreate( 
+		led_toggle_task						,	// pvTaskCode		:	Task Function 
+		"led1tog"									,	// pcName				:	Task Friendly Name 
+		configMINIMAL_STACK_SIZE	,	// usStackDepth	:	number of words for task stack size 
+		&st_l_led_1_params		 		,	// pvParameters	: A value that is passed as the paramater to the created task. 
+		PRI_HIGH									,	// uxPriority		:	The priority at which the created task will execute. 
+		NULL // [out] task handle 
+	); 
+	
+	// Led 2 task
+	xTaskCreate( 
+		led_toggle_task						,	// pvTaskCode		:	Task Function 
+		"led2tog"									,	// pcName				:	Task Friendly Name 
+		configMINIMAL_STACK_SIZE	,	// usStackDepth	:	number of words for task stack size 
+		&st_l_led_2_params		 		,	// pvParameters	: A value that is passed as the paramater to the created task. 
+		PRI_HIGH									,	// uxPriority		:	The priority at which the created task will execute. 
+		NULL // [out] task handle 
+	); 
+	
+	// Led 1 task
+	xTaskCreate( 
+		led_toggle_task						,	// pvTaskCode		:	Task Function 
+		"led3tog"									,	// pcName				:	Task Friendly Name 
+		configMINIMAL_STACK_SIZE	,	// usStackDepth	:	number of words for task stack size 
+		&st_l_led_3_params		 		,	// pvParameters	: A value that is passed as the paramater to the created task. 
+		PRI_HIGH									,	// uxPriority		:	The priority at which the created task will execute. 
+		NULL // [out] task handle 
+	); 
+ 
+ 
 
 	/* Now all the tasks have been started - start the scheduler.
 
@@ -111,6 +188,39 @@ int main( void )
 	for( ;; );
 }
 /*-----------------------------------------------------------*/
+
+static void led_toggle_task(void * pvParameters)
+{
+	for(;;)
+	{
+		uint16_t u16_l_delay;
+		portX_t portX_l_led_port;
+		pinX_t	pinX_l_led_pin;
+		
+		// args check
+		if(NULL_PTR != pvParameters)
+		{
+			portX_l_led_port	= ((st_led_task_param_t *)pvParameters)->portX_led_port;
+			pinX_l_led_pin 		= ((st_led_task_param_t *)pvParameters)->pinX_led_pin;
+			u16_l_delay 			= ((st_led_task_param_t *)pvParameters)->uint16_delay;
+			
+			// delay check
+			if(u16_l_delay > 0 && u16_l_delay <= 2000)
+			{
+				// Turn led on 
+        GPIO_write(portX_l_led_port, pinX_l_led_pin, PIN_IS_HIGH); 
+        vTaskDelay(u16_l_delay); // delay led toggle 
+			 
+				// Turn led off 
+        GPIO_write(portX_l_led_port, pinX_l_led_pin, PIN_IS_LOW);				
+				vTaskDelay(u16_l_delay); // delay led toggle
+			}
+		}
+	}
+	
+	// undefined behavior handling, deleting task
+	vTaskDelete(NULL);
+}
 
 /* Function to reset timer 1 */
 void timer1Reset(void)
