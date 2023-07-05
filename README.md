@@ -18,7 +18,7 @@
 	- LED toggles every `400ms` if the button was pressed for more than `2 sec` and less than `4 sec`
 	- LED is off if the button was pressed for less than `2 sec`
 
-> #### Combined Video 📽️ 👉 Youtube - Uploading
+> #### Combined Video 📽️ 👉 [Youtube](https://youtu.be/PVvxsCqyGT4)
 
 |              | Task 1                                                                 | Task 2                                                                 | Task 3                                                                 |
 |--------------|------------------------------------------------------------------------|------------------------------------------------------------------------|------------------------------------------------------------------------|
