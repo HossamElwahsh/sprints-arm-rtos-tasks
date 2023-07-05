@@ -20,12 +20,22 @@
 
 | Task Item    | Task 1                                                                 | Task 2                                                                 | Task 3                                                                 |
 |--------------|------------------------------------------------------------------------|------------------------------------------------------------------------|------------------------------------------------------------------------|
-| Video        | Youtube - Uploading                                                    | Youtube - Uploading                                                    | Youtube - Uploading                                                    |
+| Video 📽️    | Youtube - Uploading                                                    | Youtube - Uploading                                                    | Youtube - Uploading                                                    |
 | Pull Request | [PR-1](https://github.com/HossamElwahsh/sprints-arm-rtos-tasks/pull/1) | [PR-2](https://github.com/HossamElwahsh/sprints-arm-rtos-tasks/pull/2) | [PR-3](https://github.com/HossamElwahsh/sprints-arm-rtos-tasks/pull/3) |
 
 ----
 
 ### Assignment: S_RTOS_02
+
+#### Task 1
+- Using FreeRTOS to toggle an LED when push button is pressed and released.
+
+| Task Item    | Task 1                                                                 | Task 2 | Task 3 |
+|--------------|------------------------------------------------------------------------|--------|--------|
+| Video 📽️    | Youtube - Uploading                                                    | TBC    | TBC    |
+| Pull Request | [PR-4](https://github.com/HossamElwahsh/sprints-arm-rtos-tasks/pull/4) | TBC    | TBC    |
+ 
+
 > TBC
 
 --- 
