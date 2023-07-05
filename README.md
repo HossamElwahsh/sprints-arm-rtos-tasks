@@ -13,10 +13,10 @@
   - LED 3 toggles every `1000ms`
 
 #### Task 3
-- Using FreeRTOS to toggle 3 LEDs with different timings.
-  - LED 1 toggles every `100ms`
-  - LED 2 toggles every `500ms`
-  - LED 3 toggles every `1000ms`
+- Using FreeRTOS to control LED toggling rate by pressing a push button. (action on release/falling edge)
+	- LED toggles every `100ms` if the button was pressed for more than `4 sec`
+	- LED toggles every `400ms` if the button was pressed for more than `2 sec` and less than `4 sec`
+	- LED is off if the button was pressed for less than `2 sec`
 
 > #### Combined Video 📽️ 👉 Youtube - Uploading
 
