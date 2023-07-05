@@ -82,9 +82,9 @@
 
 #define BTN_PORT				PORT_0
 #define BTN_PIN					PIN0
-#define BTN_MS_DEBOUNCE 100
+#define BTN_MS_DEBOUNCE 50
 
-#define APP_NOTIF_TOGGLE 0x01
+#define APP_NOTIF_TOGGLE 0x02
 
 /* Global Variables */
 TaskHandle_t gl_TaskHandle_led_handler;
@@ -126,7 +126,7 @@ int main( void )
 		"led-hnd"									,	// pcName				:	Task Friendly Name
 		configMINIMAL_STACK_SIZE	,	// usStackDepth	:	number of words for task stack size
 		NULL											,	// pvParameters	: A value that is passed as the paramater to the created task.
-		PRI_HIGH									,	// uxPriority		:	The priority at which the created task will execute.
+		PRI_MED	  								,	// uxPriority		:	The priority at which the created task will execute.
 		&gl_TaskHandle_led_handler	// [out] task handle
 	);
 	
@@ -136,7 +136,7 @@ int main( void )
 		"btn-hnd"									,	// pcName				:	Task Friendly Name
 		configMINIMAL_STACK_SIZE	,	// usStackDepth	:	number of words for task stack size
 		NULL											,	// pvParameters	: A value that is passed as the paramater to the created task.
-		PRI_MED 									,	// uxPriority		:	The priority at which the created task will execute.
+		PRI_HIGH 									,	// uxPriority		:	The priority at which the created task will execute.
 		&gl_TaskHandle_btn_handler	// [out] task handle
 	);
 	
@@ -163,8 +163,7 @@ int main( void )
  */
 static void btn_handler_task(void *pvParameters)
 {
-	const TickType_t tickType_check_ms_delay = 5; // every 5 ticks = 5ms
-	uint32_t u32_press_time = 0;
+	const TickType_t tickType_l_check_ms_delay = 5; // every 5 ticks = 5ms
 	
     /* Task Loop */
     for (;;)
@@ -178,7 +177,7 @@ static void btn_handler_task(void *pvParameters)
 				// recheck if button is released
 				while(PIN_IS_HIGH == GPIO_read(BTN_PORT, BTN_PIN)) // wait until btn is released
 				{
-					vTaskDelay(tickType_check_ms_delay);
+					vTaskDelay(tickType_l_check_ms_delay);
 				}
 			
 				// button released, toggle LED
