@@ -46,6 +46,7 @@ void GPIO_init(void)
 				break;
 	
 			default:
+				break;
 		}
 	}
 }
