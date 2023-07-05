@@ -8,9 +8,9 @@
 
 #### Task 2
 - Using FreeRTOS to toggle 3 LEDs with different timings.
+  - LED 1 toggles every `100ms`
   - LED 2 toggles every `500ms`
   - LED 3 toggles every `1000ms`
-  - LED 1 toggles every `100ms`
 
 #### Task 3
 - Using FreeRTOS to toggle 3 LEDs with different timings.
