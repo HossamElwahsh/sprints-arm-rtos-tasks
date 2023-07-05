@@ -338,28 +338,28 @@ Image Symbol Table
     .text                                    0x00001504   Section        0  gpio.o(.text)
     .text                                    0x00001660   Section        0  main.o(.text)
     notify_led_handler                       0x00001661   Thumb Code    24  main.o(.text)
-    btn_handler_task                         0x00001679   Thumb Code    56  main.o(.text)
-    led_handler_task                         0x000016b1   Thumb Code    66  main.o(.text)
-    configTimer1                             0x000016f3   Thumb Code    22  main.o(.text)
-    prvSetupHardware                         0x00001709   Thumb Code    30  main.o(.text)
-    .text                                    0x000017a0   Section        0  serial.o(.text)
-    .text                                    0x00001940   Section      384  aeabi_sdiv.o(.text)
-    __arm_div8                               0x0000196c   ARM Code       0  aeabi_sdiv.o(.text)
-    __arm_div5                               0x00001990   ARM Code       0  aeabi_sdiv.o(.text)
-    __arm_div2                               0x000019b4   ARM Code       0  aeabi_sdiv.o(.text)
-    __arm_div_large                          0x000019f0   ARM Code       0  aeabi_sdiv.o(.text)
-    .text                                    0x00001ac0   Section        0  heapauxi.o(.text)
-    .text                                    0x00001ac8   Section       96  sys_stackheap_outer.o(.text)
-    .text                                    0x00001b28   Section        0  exit.o(.text)
-    .text                                    0x00001b3c   Section       12  libspace.o(.text)
-    .text                                    0x00001b50   Section        0  sys_exit.o(.text)
-    .text                                    0x00001b5c   Section        4  use_no_semi.o(.text)
-    .text                                    0x00001b60   Section        0  indicate_semi.o(.text)
-    .text_udiv                               0x00001b64   Section       36  aeabi_sdiv.o(.text_udiv)
-    PORT_ASM                                 0x00001b8c   Section      396  portasm.o(PORT_ASM)
-    i.__ARM_common_disable_irq               0x00001d24   Section        0  tasks.o(i.__ARM_common_disable_irq)
-    i.__ARM_common_enable_irq                0x00001d3c   Section        0  port.o(i.__ARM_common_enable_irq)
-    i.__ARM_common_switch8                   0x00001d50   Section        0  tasks.o(i.__ARM_common_switch8)
+    btn_handler_task                         0x00001679   Thumb Code    50  main.o(.text)
+    led_handler_task                         0x000016ab   Thumb Code    66  main.o(.text)
+    configTimer1                             0x000016ed   Thumb Code    22  main.o(.text)
+    prvSetupHardware                         0x00001703   Thumb Code    30  main.o(.text)
+    .text                                    0x00001798   Section        0  serial.o(.text)
+    .text                                    0x00001938   Section      384  aeabi_sdiv.o(.text)
+    __arm_div8                               0x00001964   ARM Code       0  aeabi_sdiv.o(.text)
+    __arm_div5                               0x00001988   ARM Code       0  aeabi_sdiv.o(.text)
+    __arm_div2                               0x000019ac   ARM Code       0  aeabi_sdiv.o(.text)
+    __arm_div_large                          0x000019e8   ARM Code       0  aeabi_sdiv.o(.text)
+    .text                                    0x00001ab8   Section        0  heapauxi.o(.text)
+    .text                                    0x00001ac0   Section       96  sys_stackheap_outer.o(.text)
+    .text                                    0x00001b20   Section        0  exit.o(.text)
+    .text                                    0x00001b34   Section       12  libspace.o(.text)
+    .text                                    0x00001b48   Section        0  sys_exit.o(.text)
+    .text                                    0x00001b54   Section        4  use_no_semi.o(.text)
+    .text                                    0x00001b58   Section        0  indicate_semi.o(.text)
+    .text_udiv                               0x00001b5c   Section       36  aeabi_sdiv.o(.text_udiv)
+    PORT_ASM                                 0x00001b84   Section      396  portasm.o(PORT_ASM)
+    i.__ARM_common_disable_irq               0x00001d1c   Section        0  tasks.o(i.__ARM_common_disable_irq)
+    i.__ARM_common_enable_irq                0x00001d34   Section        0  port.o(i.__ARM_common_enable_irq)
+    i.__ARM_common_switch8                   0x00001d48   Section        0  tasks.o(i.__ARM_common_switch8)
     .data                                    0x40000000   Section       60  tasks.o(.data)
     pxDelayedTaskList                        0x40000004   Data           4  tasks.o(.data)
     pxOverflowDelayedTaskList                0x40000008   Data           4  tasks.o(.data)
@@ -542,45 +542,45 @@ Image Symbol Table
     GPIO_init                                0x00001505   Thumb Code   198  gpio.o(.text)
     GPIO_read                                0x000015cb   Thumb Code    40  gpio.o(.text)
     GPIO_write                               0x000015f3   Thumb Code    96  gpio.o(.text)
-    main                                     0x00001727   Thumb Code    54  main.o(.text)
-    timer1Reset                              0x0000175d   Thumb Code    26  main.o(.text)
-    xSerialPortInitMinimal                   0x000017a1   Thumb Code   124  serial.o(.text)
-    xSerialGetChar                           0x0000181d   Thumb Code    34  serial.o(.text)
-    xSerialPutChar                           0x0000183f   Thumb Code     6  serial.o(.text)
-    vSerialPutString                         0x00001845   Thumb Code    84  serial.o(.text)
-    vUART_ISRHandler                         0x00001899   Thumb Code   120  serial.o(.text)
-    __aeabi_idiv                             0x00001940   ARM Code       0  aeabi_sdiv.o(.text)
-    __aeabi_idivmod                          0x00001940   ARM Code     384  aeabi_sdiv.o(.text)
-    __use_two_region_memory                  0x00001ac1   Thumb Code     2  heapauxi.o(.text)
-    __rt_heap_escrow$2region                 0x00001ac3   Thumb Code     2  heapauxi.o(.text)
-    __rt_heap_expand$2region                 0x00001ac5   Thumb Code     2  heapauxi.o(.text)
-    __user_setup_stackheap                   0x00001ac8   ARM Code      96  sys_stackheap_outer.o(.text)
-    exit                                     0x00001b29   Thumb Code    20  exit.o(.text)
-    __user_libspace                          0x00001b3c   ARM Code      12  libspace.o(.text)
-    __user_perproc_libspace                  0x00001b3c   ARM Code       0  libspace.o(.text)
-    __user_perthread_libspace                0x00001b3c   ARM Code       0  libspace.o(.text)
-    Inline ARM to Thumb Veneer to _sys_exit  0x00001b48   ARM Code       8  sys_exit.o(.text)
-    _sys_exit                                0x00001b51   Thumb Code     8  sys_exit.o(.text)
-    __I$use$semihosting                      0x00001b5c   ARM Code       0  use_no_semi.o(.text)
-    __use_no_semihosting_swi                 0x00001b5c   ARM Code       4  use_no_semi.o(.text)
-    Inline Thumb to ARM Veneer to __aeabi_uidivmod 0x00001b61   Thumb Code     4  aeabi_sdiv.o(.text_udiv)
-    __semihosting_library_function           0x00001b60   ARM Code       0  indicate_semi.o(.text)
-    __aeabi_uidiv                            0x00001b64   ARM Code       0  aeabi_sdiv.o(.text_udiv)
-    __aeabi_uidivmod                         0x00001b64   ARM Code      36  aeabi_sdiv.o(.text_udiv)
-    Inline Thumb to ARM Veneer to vPortStartFirstTask 0x00001b89   Thumb Code     4  portasm.o(PORT_ASM)
-    vPortStartFirstTask                      0x00001b8c   ARM Code       0  portasm.o(PORT_ASM)
-    vPortYield                               0x00001bbc   ARM Code       0  portasm.o(PORT_ASM)
-    vPortYieldProcessor                      0x00001bc4   ARM Code       0  portasm.o(PORT_ASM)
-    vPreemptiveTick                          0x00001c50   ARM Code       0  portasm.o(PORT_ASM)
-    Short Thumb to ARM Veneer to vPortYield  0x00001d19   Thumb Code     8  anon$$obj.o(Veneer$$Code)
-    Inline Thumb to ARM Veneer to __ARM_common_disable_irq 0x00001d21   Thumb Code     4  tasks.o(i.__ARM_common_disable_irq)
-    __ARM_common_disable_irq                 0x00001d24   ARM Code      20  tasks.o(i.__ARM_common_disable_irq)
-    Inline Thumb to ARM Veneer to __ARM_common_enable_irq 0x00001d39   Thumb Code     4  port.o(i.__ARM_common_enable_irq)
-    __ARM_common_enable_irq                  0x00001d3c   ARM Code      16  port.o(i.__ARM_common_enable_irq)
-    Inline Thumb to ARM Veneer to __ARM_common_switch8 0x00001d4d   Thumb Code     4  tasks.o(i.__ARM_common_switch8)
-    __ARM_common_switch8                     0x00001d50   ARM Code      32  tasks.o(i.__ARM_common_switch8)
-    Region$$Table$$Base                      0x00001d70   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00001d90   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x00001721   Thumb Code    54  main.o(.text)
+    timer1Reset                              0x00001757   Thumb Code    26  main.o(.text)
+    xSerialPortInitMinimal                   0x00001799   Thumb Code   124  serial.o(.text)
+    xSerialGetChar                           0x00001815   Thumb Code    34  serial.o(.text)
+    xSerialPutChar                           0x00001837   Thumb Code     6  serial.o(.text)
+    vSerialPutString                         0x0000183d   Thumb Code    84  serial.o(.text)
+    vUART_ISRHandler                         0x00001891   Thumb Code   120  serial.o(.text)
+    __aeabi_idiv                             0x00001938   ARM Code       0  aeabi_sdiv.o(.text)
+    __aeabi_idivmod                          0x00001938   ARM Code     384  aeabi_sdiv.o(.text)
+    __use_two_region_memory                  0x00001ab9   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_escrow$2region                 0x00001abb   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_expand$2region                 0x00001abd   Thumb Code     2  heapauxi.o(.text)
+    __user_setup_stackheap                   0x00001ac0   ARM Code      96  sys_stackheap_outer.o(.text)
+    exit                                     0x00001b21   Thumb Code    20  exit.o(.text)
+    __user_libspace                          0x00001b34   ARM Code      12  libspace.o(.text)
+    __user_perproc_libspace                  0x00001b34   ARM Code       0  libspace.o(.text)
+    __user_perthread_libspace                0x00001b34   ARM Code       0  libspace.o(.text)
+    Inline ARM to Thumb Veneer to _sys_exit  0x00001b40   ARM Code       8  sys_exit.o(.text)
+    _sys_exit                                0x00001b49   Thumb Code     8  sys_exit.o(.text)
+    __I$use$semihosting                      0x00001b54   ARM Code       0  use_no_semi.o(.text)
+    __use_no_semihosting_swi                 0x00001b54   ARM Code       4  use_no_semi.o(.text)
+    Inline Thumb to ARM Veneer to __aeabi_uidivmod 0x00001b59   Thumb Code     4  aeabi_sdiv.o(.text_udiv)
+    __semihosting_library_function           0x00001b58   ARM Code       0  indicate_semi.o(.text)
+    __aeabi_uidiv                            0x00001b5c   ARM Code       0  aeabi_sdiv.o(.text_udiv)
+    __aeabi_uidivmod                         0x00001b5c   ARM Code      36  aeabi_sdiv.o(.text_udiv)
+    Inline Thumb to ARM Veneer to vPortStartFirstTask 0x00001b81   Thumb Code     4  portasm.o(PORT_ASM)
+    vPortStartFirstTask                      0x00001b84   ARM Code       0  portasm.o(PORT_ASM)
+    vPortYield                               0x00001bb4   ARM Code       0  portasm.o(PORT_ASM)
+    vPortYieldProcessor                      0x00001bbc   ARM Code       0  portasm.o(PORT_ASM)
+    vPreemptiveTick                          0x00001c48   ARM Code       0  portasm.o(PORT_ASM)
+    Short Thumb to ARM Veneer to vPortYield  0x00001d11   Thumb Code     8  anon$$obj.o(Veneer$$Code)
+    Inline Thumb to ARM Veneer to __ARM_common_disable_irq 0x00001d19   Thumb Code     4  tasks.o(i.__ARM_common_disable_irq)
+    __ARM_common_disable_irq                 0x00001d1c   ARM Code      20  tasks.o(i.__ARM_common_disable_irq)
+    Inline Thumb to ARM Veneer to __ARM_common_enable_irq 0x00001d31   Thumb Code     4  port.o(i.__ARM_common_enable_irq)
+    __ARM_common_enable_irq                  0x00001d34   ARM Code      16  port.o(i.__ARM_common_enable_irq)
+    Inline Thumb to ARM Veneer to __ARM_common_switch8 0x00001d45   Thumb Code     4  tasks.o(i.__ARM_common_switch8)
+    __ARM_common_switch8                     0x00001d48   ARM Code      32  tasks.o(i.__ARM_common_switch8)
+    Region$$Table$$Base                      0x00001d68   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00001d88   Number         0  anon$$obj.o(Region$$Table)
     pxCurrentTCB                             0x40000000   Data           4  tasks.o(.data)
     ulCriticalNesting                        0x4000003c   Data           4  port.o(.data)
     PinConfig_array                          0x40000058   Data          90  gpio_cfg.o(.data)
@@ -603,9 +603,9 @@ Memory Map of the image
 
   Image Entry point : 0x00000104
 
-  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x00001e50, Max: 0x00040000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x00001e48, Max: 0x00040000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00001d90, Max: 0x00040000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00001d88, Max: 0x00040000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -667,47 +667,47 @@ Memory Map of the image
     0x00001450   0x00001450   0x00000020   Code   RO          140    .text               startup.o
     0x00001470   0x00001470   0x00000094   Code   RO          169    .text               serialisr.o
     0x00001504   0x00001504   0x0000015c   Code   RO          172    .text               gpio.o
-    0x00001660   0x00001660   0x00000140   Code   RO          206    .text               main.o
-    0x000017a0   0x000017a0   0x000001a0   Code   RO          228    .text               serial.o
-    0x00001940   0x00001940   0x00000180   Code   RO          251    .text               c_t.l(aeabi_sdiv.o)
-    0x00001ac0   0x00001ac0   0x00000006   Code   RO          267    .text               c_t.l(heapauxi.o)
-    0x00001ac6   0x00001ac6   0x00000002   PAD
-    0x00001ac8   0x00001ac8   0x00000060   Code   RO          295    .text               c_t.l(sys_stackheap_outer.o)
-    0x00001b28   0x00001b28   0x00000014   Code   RO          297    .text               c_t.l(exit.o)
-    0x00001b3c   0x00001b3c   0x0000000c   Code   RO          309    .text               c_t.l(libspace.o)
-    0x00001b48   0x00001b48   0x00000008   Ven    RO          365    .text               c_t.l(sys_exit.o)
-    0x00001b50   0x00001b50   0x0000000c   Code   RO          365    .text               c_t.l(sys_exit.o)
-    0x00001b5c   0x00001b5c   0x00000004   Code   RO          386    .text               c_t.l(use_no_semi.o)
-    0x00001b60   0x00001b60   0x00000000   Code   RO          388    .text               c_t.l(indicate_semi.o)
-    0x00001b60   0x00001b60   0x00000004   Ven    RO          252    .text_udiv          c_t.l(aeabi_sdiv.o)
-    0x00001b64   0x00001b64   0x00000024   Code   RO          252    .text_udiv          c_t.l(aeabi_sdiv.o)
-    0x00001b88   0x00001b88   0x00000004   Ven    RO            1    PORT_ASM            portasm.o
-    0x00001b8c   0x00001b8c   0x0000018c   Code   RO            1    PORT_ASM            portasm.o
-    0x00001d18   0x00001d18   0x00000008   Ven    RO          455    Veneer$$Code        anon$$obj.o
-    0x00001d20   0x00001d20   0x00000004   Ven    RO           21    i.__ARM_common_disable_irq  tasks.o
-    0x00001d24   0x00001d24   0x00000014   Code   RO           21    i.__ARM_common_disable_irq  tasks.o
-    0x00001d38   0x00001d38   0x00000004   Ven    RO          117    i.__ARM_common_enable_irq  port.o
-    0x00001d3c   0x00001d3c   0x00000010   Code   RO          117    i.__ARM_common_enable_irq  port.o
-    0x00001d4c   0x00001d4c   0x00000004   Ven    RO           19    i.__ARM_common_switch8  tasks.o
-    0x00001d50   0x00001d50   0x00000020   Code   RO           19    i.__ARM_common_switch8  tasks.o
-    0x00001d70   0x00001d70   0x00000020   Data   RO          438    Region$$Table       anon$$obj.o
+    0x00001660   0x00001660   0x00000138   Code   RO          206    .text               main.o
+    0x00001798   0x00001798   0x000001a0   Code   RO          228    .text               serial.o
+    0x00001938   0x00001938   0x00000180   Code   RO          251    .text               c_t.l(aeabi_sdiv.o)
+    0x00001ab8   0x00001ab8   0x00000006   Code   RO          267    .text               c_t.l(heapauxi.o)
+    0x00001abe   0x00001abe   0x00000002   PAD
+    0x00001ac0   0x00001ac0   0x00000060   Code   RO          295    .text               c_t.l(sys_stackheap_outer.o)
+    0x00001b20   0x00001b20   0x00000014   Code   RO          297    .text               c_t.l(exit.o)
+    0x00001b34   0x00001b34   0x0000000c   Code   RO          309    .text               c_t.l(libspace.o)
+    0x00001b40   0x00001b40   0x00000008   Ven    RO          365    .text               c_t.l(sys_exit.o)
+    0x00001b48   0x00001b48   0x0000000c   Code   RO          365    .text               c_t.l(sys_exit.o)
+    0x00001b54   0x00001b54   0x00000004   Code   RO          386    .text               c_t.l(use_no_semi.o)
+    0x00001b58   0x00001b58   0x00000000   Code   RO          388    .text               c_t.l(indicate_semi.o)
+    0x00001b58   0x00001b58   0x00000004   Ven    RO          252    .text_udiv          c_t.l(aeabi_sdiv.o)
+    0x00001b5c   0x00001b5c   0x00000024   Code   RO          252    .text_udiv          c_t.l(aeabi_sdiv.o)
+    0x00001b80   0x00001b80   0x00000004   Ven    RO            1    PORT_ASM            portasm.o
+    0x00001b84   0x00001b84   0x0000018c   Code   RO            1    PORT_ASM            portasm.o
+    0x00001d10   0x00001d10   0x00000008   Ven    RO          455    Veneer$$Code        anon$$obj.o
+    0x00001d18   0x00001d18   0x00000004   Ven    RO           21    i.__ARM_common_disable_irq  tasks.o
+    0x00001d1c   0x00001d1c   0x00000014   Code   RO           21    i.__ARM_common_disable_irq  tasks.o
+    0x00001d30   0x00001d30   0x00000004   Ven    RO          117    i.__ARM_common_enable_irq  port.o
+    0x00001d34   0x00001d34   0x00000010   Code   RO          117    i.__ARM_common_enable_irq  port.o
+    0x00001d44   0x00001d44   0x00000004   Ven    RO           19    i.__ARM_common_switch8  tasks.o
+    0x00001d48   0x00001d48   0x00000020   Code   RO           19    i.__ARM_common_switch8  tasks.o
+    0x00001d68   0x00001d68   0x00000020   Data   RO          438    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x40000000, Load base: 0x00001d90, Size: 0x00003cc0, Max: 0x00004000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x40000000, Load base: 0x00001d88, Size: 0x00003cc0, Max: 0x00004000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x40000000   0x00001d90   0x0000003c   Data   RW            8    .data               tasks.o
-    0x4000003c   0x00001dcc   0x00000004   Data   RW          106    .data               port.o
-    0x40000040   0x00001dd0   0x00000018   Data   RW          124    .data               heap_2.o
-    0x40000058   0x00001de8   0x0000005c   Data   RW          194    .data               gpio_cfg.o
-    0x400000b4   0x00001e44   0x00000008   Data   RW          207    .data               main.o
-    0x400000bc   0x00001e4c   0x00000004   Data   RW          230    .data               serial.o
+    0x40000000   0x00001d88   0x0000003c   Data   RW            8    .data               tasks.o
+    0x4000003c   0x00001dc4   0x00000004   Data   RW          106    .data               port.o
+    0x40000040   0x00001dc8   0x00000018   Data   RW          124    .data               heap_2.o
+    0x40000058   0x00001de0   0x0000005c   Data   RW          194    .data               gpio_cfg.o
+    0x400000b4   0x00001e3c   0x00000008   Data   RW          207    .data               main.o
+    0x400000bc   0x00001e44   0x00000004   Data   RW          230    .data               serial.o
     0x400000c0        -       0x000000b4   Zero   RW            7    .bss                tasks.o
     0x40000174        -       0x00003400   Zero   RW          123    .bss                heap_2.o
     0x40003574        -       0x000000c8   Zero   RW          229    .bss                serial.o
     0x4000363c        -       0x00000060   Zero   RW          310    .bss                c_t.l(libspace.o)
-    0x4000369c   0x00001e50   0x00000004   PAD
+    0x4000369c   0x00001e48   0x00000004   PAD
     0x400036a0        -       0x00000000   Zero   RW          138    HEAP                startup.o
     0x400036a0        -       0x00000620   Zero   RW          137    STACK               startup.o
 
@@ -723,7 +723,7 @@ Image component sizes
          0          0          0         92          0        983   gpio_cfg.o
        304         26          0         24      13312       3280   heap_2.o
        152          0          0          0          0       1870   list.o
-       320         42          0          8          0       2645   main.o
+       312         40          0          8          0       2641   main.o
        360         76          0          4          0       3095   port.o
        396         24          0          0          0        396   portasm.o
          0          0          0          0          0       3068   queue.o
@@ -733,7 +733,7 @@ Image component sizes
       3924        248          0         60        180      35397   tasks.o
 
     ----------------------------------------------------------------------
-      6684        550         32        192      15260      56749   Object Totals
+      6676        548         32        192      15260      56745   Object Totals
         24          0         32          0          0          0   (incl. Generated)
          0          0          0          0          0          0   (incl. Padding)
 
@@ -783,15 +783,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      7536        570         32        192      15360      56637   Grand Totals
-      7536        570         32        192      15360      56637   ELF Image Totals
-      7536        570         32        192          0          0   ROM Totals
+      7528        568         32        192      15360      56633   Grand Totals
+      7528        568         32        192      15360      56633   ELF Image Totals
+      7528        568         32        192          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 7568 (   7.39kB)
+    Total RO  Size (Code + RO Data)                 7560 (   7.38kB)
     Total RW  Size (RW Data + ZI Data)             15552 (  15.19kB)
-    Total ROM Size (Code + RO Data + RW Data)       7760 (   7.58kB)
+    Total ROM Size (Code + RO Data + RW Data)       7752 (   7.57kB)
 
 ==============================================================================
 

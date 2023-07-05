@@ -137,7 +137,7 @@ int main( void )
 		"led-hnd"									,	// pcName				:	Task Friendly Name
 		configMINIMAL_STACK_SIZE	,	// usStackDepth	:	number of words for task stack size
 		NULL											,	// pvParameters	: A value that is passed as the paramater to the created task.
-		PRI_MED	  								,	// uxPriority		:	The priority at which the created task will execute.
+		PRI_HIGH  								,	// uxPriority		:	The priority at which the created task will execute.
 		&gl_TaskHandle_led_handler	// [out] task handle
 	);
 	
@@ -147,7 +147,7 @@ int main( void )
 		"btn-hnd"									,	// pcName				:	Task Friendly Name
 		configMINIMAL_STACK_SIZE	,	// usStackDepth	:	number of words for task stack size
 		NULL											,	// pvParameters	: A value that is passed as the paramater to the created task.
-		PRI_HIGH 									,	// uxPriority		:	The priority at which the created task will execute.
+		PRI_MED 									,	// uxPriority		:	The priority at which the created task will execute.
 		&gl_TaskHandle_btn_handler	// [out] task handle
 	);
 	
@@ -176,7 +176,7 @@ static void btn_handler_task(void *pvParameters)
 {
 	const TickType_t tickType_l_check_ms_delay = 5; // every 5 ticks = 5ms
 	
-	notify_led_handler(150); // initial notification
+	//notify_led_handler(NULL); // initial notification
 	
     /* Task Loop */
     for (;;)
