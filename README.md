@@ -18,9 +18,10 @@
   - LED 2 toggles every `500ms`
   - LED 3 toggles every `1000ms`
 
-| Task Item    | Task 1                                                                 | Task 2                                                                 | Task 3                                                                 |
+> #### Combined Video 📽️ 👉 Youtube - Uploading
+
+|              | Task 1                                                                 | Task 2                                                                 | Task 3                                                                 |
 |--------------|------------------------------------------------------------------------|------------------------------------------------------------------------|------------------------------------------------------------------------|
-| Video 📽️    | Youtube - Uploading                                                    | Youtube - Uploading                                                    | Youtube - Uploading                                                    |
 | Pull Request | [PR-1](https://github.com/HossamElwahsh/sprints-arm-rtos-tasks/pull/1) | [PR-2](https://github.com/HossamElwahsh/sprints-arm-rtos-tasks/pull/2) | [PR-3](https://github.com/HossamElwahsh/sprints-arm-rtos-tasks/pull/3) |
 
 ----
@@ -32,15 +33,11 @@
 
 | Task Item    | Task 1                                                                 | Task 2 | Task 3 |
 |--------------|------------------------------------------------------------------------|--------|--------|
-| Video 📽️    | Youtube - Uploading                                                    | TBC    | TBC    |
 | Pull Request | [PR-4](https://github.com/HossamElwahsh/sprints-arm-rtos-tasks/pull/4) | TBC    | TBC    |
- 
-
-> TBC
 
 --- 
 ### Common Technical Data
-| ---          | --- |         ---          |
+| Item         | --- |         Data         |
 |--------------|-----|:--------------------:|
 | FreeRTOS     | 👉  |       v10.3.0        | 
 | IDE          | 👉  | Keil µVision 5 MDK29 | 
