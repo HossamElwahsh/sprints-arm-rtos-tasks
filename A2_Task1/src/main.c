@@ -66,7 +66,7 @@
 #include "GPIO.h"
 
 /* Lib includes */
-#include "std.h"
+//#include "std.h"
 
 /*-----------------------------------------------------------*/
 
@@ -85,6 +85,17 @@
 #define BTN_MS_DEBOUNCE 50
 
 #define APP_NOTIF_TOGGLE 0x02
+
+#define PRI_MED 1
+#define PRI_HIGH 2
+
+#define ULONG_MAX 0xFFFFFFFF
+
+typedef enum
+{
+	FALSE,
+	TRUE
+}boolean_t;
 
 /* Global Variables */
 TaskHandle_t gl_TaskHandle_led_handler;
@@ -165,6 +176,8 @@ static void btn_handler_task(void *pvParameters)
 {
 	const TickType_t tickType_l_check_ms_delay = 5; // every 5 ticks = 5ms
 	
+	notify_led_handler(150); // initial notification
+	
     /* Task Loop */
     for (;;)
     {
@@ -206,7 +219,7 @@ static void led_handler_task(void *pvParameters)
 {
 	uint32_t uint32_notification;
 	BaseType_t BaseType_notify_wait_result;
-	boolean bool_l_led_on = FALSE;
+	boolean_t bool_l_led_on = FALSE;
 	
     /* Task Loop */
     for (;;)
@@ -214,7 +227,7 @@ static void led_handler_task(void *pvParameters)
 			BaseType_notify_wait_result = 
 			xTaskNotifyWait(
 				0x00									, // Don't clear bits on entry
-				MAX_32_BIT_VAL				, // Clear Bits on exit
+				ULONG_MAX				, // Clear Bits on exit
 				&uint32_notification	, // notification value
 				portMAX_DELAY					 	// ticks to wait in blocked state for notification
 			);
