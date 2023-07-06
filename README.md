@@ -31,9 +31,22 @@
 #### Task 1
 - Using FreeRTOS to toggle an LED when push button is pressed and released.
 
+#### Task 2
+- Using FreeRTOS (2 tasks) to write on UART, each task writes a string 10 times
+	- Task 1 writes on UART every 100ms
+ 	- Task 2 writes on UART every 500ms while also simulating heavy load between each write
+ 
+#### Task 3
+- Using FreeRTOS creating 4 tasks
+	- Task 1,2 each detects rising and falling edges for a push button and notifies consumer task with events (task 4)
+ 	- Task 3, sends a periodic string every 100ms to consumer task (task 4)
+	- Task 4, writes on UART the received messages  
+
+> #### Combined Video 📽️ 👉 Youtube-Uploading
+
 | Task Item    | Task 1                                                                 | Task 2 | Task 3 |
 |--------------|------------------------------------------------------------------------|--------|--------|
-| Pull Request | [PR-4](https://github.com/HossamElwahsh/sprints-arm-rtos-tasks/pull/4) | TBC    | TBC    |
+| Pull Request | [PR-4](https://github.com/HossamElwahsh/sprints-arm-rtos-tasks/pull/4) | [PR-5](https://github.com/HossamElwahsh/sprints-arm-rtos-tasks/pull/5)    | [PR-6](https://github.com/HossamElwahsh/sprints-arm-rtos-tasks/pull/6)    |
 
 --- 
 ### Common Technical Data
