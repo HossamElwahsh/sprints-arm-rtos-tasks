@@ -75,9 +75,9 @@
 #define mainCOM_TEST_BAUD_RATE	( ( unsigned long ) 115200 )
 
 #define APP_PRI_DEFAULT	0
-#define APP_PRI_LOW 		0
-#define APP_PRI_MED 		0
-#define APP_PRI_HIGH 		0
+#define APP_PRI_LOW 		1
+#define APP_PRI_MED 		2
+#define APP_PRI_HIGH 		3
 
 #define APP_TASK_1_MS_DELAY 100
 #define APP_TASK_2_MS_DELAY 500
