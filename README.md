@@ -42,7 +42,7 @@
  	- Task 3, sends a periodic string every 100ms to consumer task (task 4)
 	- Task 4, writes on UART the received messages  
 
-> #### Combined Video 📽️ 👉 Youtube-Uploading
+> #### Combined Video 📽️ 👉 [Youtube](https://youtu.be/Lp8HviddqsM)
 
 | Task Item    | Task 1                                                                 | Task 2 | Task 3 |
 |--------------|------------------------------------------------------------------------|--------|--------|
