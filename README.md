@@ -29,7 +29,7 @@
 ### Assignment: S_RTOS_02
 
 #### Task 1
-- Using FreeRTOS to toggle an LED when push button is pressed and released.
+- Using FreeRTOS to toggle an LED when push button is pressed (action taken on release)
 
 #### Task 2
 - Using FreeRTOS (2 tasks) to write on UART, each task writes a string 10 times
