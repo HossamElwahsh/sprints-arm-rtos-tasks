@@ -92,6 +92,8 @@
 #define LED_2_DELAY	500
 #define LED_3_DELAY	1000
 
+#define TWO_SEC_IN_MS 2000
+
 /* Private Types */
 typedef struct
 {
@@ -205,7 +207,7 @@ static void led_toggle_task(void * pvParameters)
 			u16_l_delay 			= ((st_led_task_param_t *)pvParameters)->uint16_delay;
 			
 			// delay check
-			if(u16_l_delay > 0 && u16_l_delay <= 2000)
+			if(u16_l_delay > 0 && u16_l_delay <= TWO_SEC_IN_MS)
 			{
 				// Turn led on 
         GPIO_write(portX_l_led_port, pinX_l_led_pin, PIN_IS_HIGH); 
