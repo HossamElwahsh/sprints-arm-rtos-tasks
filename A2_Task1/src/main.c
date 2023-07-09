@@ -83,6 +83,7 @@
 #define BTN_PORT				PORT_0
 #define BTN_PIN					PIN0
 #define BTN_MS_DEBOUNCE 50
+#define BTN_TICK_POLL 	5
 
 #define APP_NOTIF_TOGGLE 0x02
 
@@ -174,7 +175,7 @@ int main( void )
  */
 static void btn_handler_task(void *pvParameters)
 {
-	const TickType_t tickType_l_check_ms_delay = 5; // every 5 ticks = 5ms
+	const TickType_t tickType_l_check_ms_delay = BTN_TICK_POLL; // every 5 ticks = 5ms
 	
 	//notify_led_handler(NULL); // initial notification
 	
