@@ -80,6 +80,8 @@
 #define LED_PORT    PORT_0
 #define LED_PIN     PIN1
 
+#define ONE_SECOND_IN_MS 1000
+
 /* Global Variables */
 TaskHandle_t gl_TaskHandle_led_toggle_task;
 
@@ -147,11 +149,11 @@ static void led_toggle_task(void *pvParameters) // uses around 20 words stack de
     {
 				// Turn led on
         GPIO_write(LED_PORT, LED_PIN, PIN_IS_HIGH);
-        vTaskDelay(1000); // delay task for 1 second
+        vTaskDelay(ONE_SECOND_IN_MS); // delay task for 1 second
 			
 				// Turn led off
         GPIO_write(LED_PORT, LED_PIN, PIN_IS_LOW);
-        vTaskDelay(1000); // delay task for 1 second
+        vTaskDelay(ONE_SECOND_IN_MS); // delay task for 1 second
 			
 				uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
 			
