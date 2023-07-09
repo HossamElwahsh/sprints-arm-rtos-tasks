@@ -202,6 +202,8 @@ static void btn_handler_task(void *pvParameters)
 				// button is not pressed
 				// Do Nothing
 			}
+			
+			vTaskDelay(tickType_l_check_ms_delay);
     }
 
     // control should reach here, if reached delete task to avoid
