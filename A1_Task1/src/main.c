@@ -65,6 +65,8 @@
 #include "serial.h"
 #include "GPIO.h"
 
+/* Lib includes */
+#include "std.h"
 
 /*-----------------------------------------------------------*/
 
@@ -74,6 +76,14 @@
 /* Constants for the ComTest demo application tasks. */
 #define mainCOM_TEST_BAUD_RATE	( ( unsigned long ) 115200 )
 
+/* Macros */
+#define LED_PORT    PORT_0
+#define LED_PIN     PIN1
+
+#define ONE_SECOND_IN_MS 1000
+
+/* Global Variables */
+TaskHandle_t gl_TaskHandle_led_toggle_task;
 
 /*
  * Configure the processor for use with the Keil demo board.  This is very
@@ -81,8 +91,8 @@
  * file.
  */
 static void prvSetupHardware( void );
+static void led_toggle_task(void * pvParameters);
 /*-----------------------------------------------------------*/
-
 
 /*
  * Application entry point:
@@ -94,7 +104,15 @@ int main( void )
 	prvSetupHardware();
 
 	
-    /* Create Tasks here */
+	/* Create Tasks here */
+	xTaskCreate(
+	led_toggle_task						,	// pvTaskCode		:	Task Function
+	"led-tog"									,	// pcName				:	Task Friendly Name
+	configMINIMAL_STACK_SIZE	,	// usStackDepth	:	number of words for task stack size
+	NULL		 									,	// pvParameters	: A value that is passed as the paramater to the created task.
+	PRI_HIGH									,	// uxPriority		:	The priority at which the created task will execute.
+	&gl_TaskHandle_led_toggle_task // [out] task handle
+	);
 
 
 	/* Now all the tasks have been started - start the scheduler.
@@ -111,6 +129,41 @@ int main( void )
 	for( ;; );
 }
 /*-----------------------------------------------------------*/
+
+/**
+ * @brief                       :   Led Task Function, toggles an LED every 1 second
+ *
+ * @param[in]   pvParameters    :   Task Parameters
+ *
+ */
+static void led_toggle_task(void *pvParameters) // uses around 20 words stack depth
+{
+	 volatile UBaseType_t uxHighWaterMark;
+
+	/* Inspect our own high water mark on entering the task. */
+	uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
+	
+	
+    /* Task Loop */
+    for (;;)
+    {
+				// Turn led on
+        GPIO_write(LED_PORT, LED_PIN, PIN_IS_HIGH);
+        vTaskDelay(ONE_SECOND_IN_MS); // delay task for 1 second
+			
+				// Turn led off
+        GPIO_write(LED_PORT, LED_PIN, PIN_IS_LOW);
+        vTaskDelay(ONE_SECOND_IN_MS); // delay task for 1 second
+			
+				uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
+			
+    }
+
+    // control should reach here, if reached delete task to avoid
+    // undefined behaviours
+    vTaskDelete(NULL); // delete self
+}
+
 
 /* Function to reset timer 1 */
 void timer1Reset(void)

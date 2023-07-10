@@ -481,6 +481,11 @@
               <FilePath>.\lib\bit_math.h</FilePath>
             </File>
             <File>
+              <FileName>std.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\lib\std.h</FilePath>
+            </File>
+            <File>
               <FileName>GPIO.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\GPIO.c</FilePath>
@@ -978,6 +983,11 @@
               <FileName>bit_math.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\lib\bit_math.h</FilePath>
+            </File>
+            <File>
+              <FileName>std.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\lib\std.h</FilePath>
             </File>
             <File>
               <FileName>GPIO.c</FileName>
