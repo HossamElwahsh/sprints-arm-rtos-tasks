@@ -65,6 +65,8 @@
 #include "serial.h"
 #include "GPIO.h"
 
+/* Lib includes */
+//#include "std.h"
 
 /*-----------------------------------------------------------*/
 
@@ -74,6 +76,31 @@
 /* Constants for the ComTest demo application tasks. */
 #define mainCOM_TEST_BAUD_RATE	( ( unsigned long ) 115200 )
 
+/* Macros */
+#define LED_PORT    		PORT_0
+#define LED_PIN     		PIN1
+
+#define BTN_PORT				PORT_0
+#define BTN_PIN					PIN0
+#define BTN_MS_DEBOUNCE 50
+#define BTN_TICK_POLL 	5
+
+#define APP_NOTIF_TOGGLE 0x02
+
+#define PRI_MED 1
+#define PRI_HIGH 2
+
+#define ULONG_MAX 0xFFFFFFFF
+
+typedef enum
+{
+	FALSE,
+	TRUE
+}boolean_t;
+
+/* Global Variables */
+TaskHandle_t gl_TaskHandle_led_handler;
+TaskHandle_t gl_TaskHandle_btn_handler;
 
 /*
  * Configure the processor for use with the Keil demo board.  This is very
@@ -81,8 +108,14 @@
  * file.
  */
 static void prvSetupHardware( void );
-/*-----------------------------------------------------------*/
 
+// Tasks Functions Prototypes
+static void led_handler_task(void *pvParameters);
+static void btn_handler_task(void *pvParameters);
+
+// Notifiers Functions Prototypes
+static void notify_led_handler(uint32_t u32_a_notification);
+/*-----------------------------------------------------------*/
 
 /*
  * Application entry point:
@@ -90,13 +123,35 @@ static void prvSetupHardware( void );
  */
 int main( void )
 {
+	
 	/* Setup the hardware for use with the Keil demo board. */
 	prvSetupHardware();
 
 	
-    /* Create Tasks here */
-
-
+	/* Create Tasks here */
+	
+	/* Handlers Tasks*/
+	
+	// led handler
+	xTaskCreate(
+		led_handler_task					,	// pvTaskCode		:	Task Function
+		"led-hnd"									,	// pcName				:	Task Friendly Name
+		configMINIMAL_STACK_SIZE	,	// usStackDepth	:	number of words for task stack size
+		NULL											,	// pvParameters	: A value that is passed as the paramater to the created task.
+		PRI_HIGH  								,	// uxPriority		:	The priority at which the created task will execute.
+		&gl_TaskHandle_led_handler	// [out] task handle
+	);
+	
+	// btn handler
+	xTaskCreate(
+		btn_handler_task					,	// pvTaskCode		:	Task Function
+		"btn-hnd"									,	// pcName				:	Task Friendly Name
+		configMINIMAL_STACK_SIZE	,	// usStackDepth	:	number of words for task stack size
+		NULL											,	// pvParameters	: A value that is passed as the paramater to the created task.
+		PRI_MED 									,	// uxPriority		:	The priority at which the created task will execute.
+		&gl_TaskHandle_btn_handler	// [out] task handle
+	);
+	
 	/* Now all the tasks have been started - start the scheduler.
 
 	NOTE : Tasks run in system mode and the scheduler runs in Supervisor mode.
@@ -111,6 +166,104 @@ int main( void )
 	for( ;; );
 }
 /*-----------------------------------------------------------*/
+
+/**
+ * @brief                       :   Led Handler Task Function, handles led state
+ *
+ * @param[in]   pvParameters    :   Task Parameters
+ *
+ */
+static void btn_handler_task(void *pvParameters)
+{
+	const TickType_t tickType_l_check_ms_delay = BTN_TICK_POLL; // every 5 ticks = 5ms
+	
+	//notify_led_handler(NULL); // initial notification
+	
+    /* Task Loop */
+    for (;;)
+    {
+			// check button state
+			if(PIN_IS_HIGH == GPIO_read(BTN_PORT, BTN_PIN))
+			{
+				// debounce delay
+				vTaskDelay(BTN_MS_DEBOUNCE);
+				
+				// recheck if button is released
+				while(PIN_IS_HIGH == GPIO_read(BTN_PORT, BTN_PIN)) // wait until btn is released
+				{
+					vTaskDelay(tickType_l_check_ms_delay);
+				}
+			
+				// button released, toggle LED
+				notify_led_handler(APP_NOTIF_TOGGLE);	
+			}
+			else
+			{
+				// button is not pressed
+				// Do Nothing
+			}
+			
+			vTaskDelay(tickType_l_check_ms_delay);
+    }
+
+    // control should reach here, if reached delete task to avoid
+    // undefined behaviours
+    vTaskDelete(NULL);
+}
+
+
+/**
+ * @brief                       :   Led Handler Task Function, handles led state
+ *
+ * @param[in]   pvParameters    :   Task Parameters
+ *
+ */
+static void led_handler_task(void *pvParameters)
+{
+	uint32_t uint32_notification;
+	BaseType_t BaseType_notify_wait_result;
+	boolean_t bool_l_led_on = FALSE;
+	
+    /* Task Loop */
+    for (;;)
+    {
+			BaseType_notify_wait_result = 
+			xTaskNotifyWait(
+				0x00									, // Don't clear bits on entry
+				ULONG_MAX				, // Clear Bits on exit
+				&uint32_notification	, // notification value
+				portMAX_DELAY					 	// ticks to wait in blocked state for notification
+			);
+			
+			if(pdTRUE == BaseType_notify_wait_result)
+			{
+				// switch led state/timing accordingly
+				if(APP_NOTIF_TOGGLE == uint32_notification)
+				{
+					// Toggle LED
+					GPIO_write(LED_PORT, LED_PIN, bool_l_led_on ? PIN_IS_LOW : PIN_IS_HIGH);
+					bool_l_led_on = bool_l_led_on ? FALSE : TRUE;
+				}
+				else
+				{
+					/* Do Nothing */
+				}
+			}
+    }
+
+    // control should reach here, if reached delete task to avoid
+    // undefined behaviours
+    vTaskDelete(NULL);
+}
+
+static void notify_led_handler(uint32_t u32_a_notification)
+{
+	xTaskNotify(
+		gl_TaskHandle_led_handler		, // Task to notify
+		u32_a_notification					, // Notification value
+		eSetValueWithOverwrite	 			// notify type
+	);
+}
 
 /* Function to reset timer 1 */
 void timer1Reset(void)
