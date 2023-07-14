@@ -60,11 +60,11 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "lpc21xx.h"
+#include "semphr.h"
 
 /* Peripheral includes. */
 #include "serial.h"
 #include "GPIO.h"
-
 
 /*-----------------------------------------------------------*/
 
@@ -74,6 +74,24 @@
 /* Constants for the ComTest demo application tasks. */
 #define mainCOM_TEST_BAUD_RATE	( ( unsigned long ) 115200 )
 
+#define APP_PRI_DEFAULT	0
+#define APP_PRI_LOW 		1
+#define APP_PRI_MED 		2
+#define APP_PRI_HIGH 		3
+
+#define APP_TASK_1_MS_DELAY 100
+#define APP_TASK_2_MS_DELAY 500
+
+
+#define APP_HEAVY_LOAD_CYCLES 10000
+
+// helper macros
+#define NULL_PTR ((void *)0)
+
+typedef struct{
+	const signed 		char 	* 	cs_str_msg;
+				unsigned 	short 		u8_msg_length;
+}st_task_msg_data_t;
 
 /*
  * Configure the processor for use with the Keil demo board.  This is very
@@ -81,8 +99,11 @@
  * file.
  */
 static void prvSetupHardware( void );
+static void task_uart_write_100ms(void * pvParameters);
+static void task_uart_write_500ms(void * pvParameters);
 /*-----------------------------------------------------------*/
 
+SemaphoreHandle_t gl_semaphore_handle_uart_mutex;
 
 /*
  * Application entry point:
@@ -90,12 +111,45 @@ static void prvSetupHardware( void );
  */
 int main( void )
 {
+	st_task_msg_data_t st_task_msg_data_l_task_100ms = {
+	(const signed char *)"task 1 hello\n", 
+		13
+	};
+	
+	st_task_msg_data_t st_task_msg_data_l_task_500ms = {
+	(const signed char *)"task 2 hi\n", 
+		10
+	};
+	
+	
 	/* Setup the hardware for use with the Keil demo board. */
 	prvSetupHardware();
 
+	// create UART Mutex
+	gl_semaphore_handle_uart_mutex = xSemaphoreCreateMutex();
 	
-    /* Create Tasks here */
-
+	/* Create Tasks here */
+	// uart 100ms writer
+	xTaskCreate(
+		task_uart_write_100ms						,	// pvTaskCode		:	Task Function
+		"uart-1"												,	// pcName				:	Task Friendly Name
+		configMINIMAL_STACK_SIZE				,	// usStackDepth	:	number of words for task stack size
+		&st_task_msg_data_l_task_100ms	,	// pvParameters	: A value that is passed as the paramater to the created task.
+		APP_PRI_DEFAULT									,	// uxPriority		:	The priority at which the created task will execute.
+		NULL											 				// [out] task handle
+	);
+	
+	
+	// uart 500ms writer
+	xTaskCreate(
+		task_uart_write_500ms						,	// pvTaskCode		:	Task Function
+		"uart-2"												,	// pcName				:	Task Friendly Name
+		configMINIMAL_STACK_SIZE				,	// usStackDepth	:	number of words for task stack size
+		&st_task_msg_data_l_task_500ms	,	// pvParameters	: A value that is passed as the paramater to the created task.
+		APP_PRI_DEFAULT									,	// uxPriority		:	The priority at which the created task will execute.
+		NULL											 				// [out] task handle
+	);
+	
 
 	/* Now all the tasks have been started - start the scheduler.
 
@@ -111,6 +165,97 @@ int main( void )
 	for( ;; );
 }
 /*-----------------------------------------------------------*/
+
+
+static void task_uart_write_100ms(void * pvParameters)
+{
+	st_task_msg_data_t l_st_task_msg_data;
+	unsigned short u8_l_write_loop_counter;
+	
+	for(;;)
+	{
+		// param check
+		if(NULL_PTR != pvParameters)
+		{
+			// proper cast
+			l_st_task_msg_data = ( * (st_task_msg_data_t * ) pvParameters);
+			
+			// send message 10 times on UART if available
+			
+			// try capture UART Mutex
+			; // block until taken
+			if(pdTRUE == xSemaphoreTake(gl_semaphore_handle_uart_mutex, portMAX_DELAY))
+			{
+				// write on UART				
+				for(u8_l_write_loop_counter = 0; u8_l_write_loop_counter < 10; u8_l_write_loop_counter++)
+				{
+					while(pdFALSE == vSerialPutString(l_st_task_msg_data.cs_str_msg, l_st_task_msg_data.u8_msg_length));
+				}
+				
+				// give mutex back
+				xSemaphoreGive(gl_semaphore_handle_uart_mutex);
+			}
+			
+		}
+		else
+		{
+			// Bad Param
+		}
+		
+		vTaskDelay(APP_TASK_1_MS_DELAY); // delay 100ms
+	}
+	
+	// undefined behavior fail-safe
+	vTaskDelete(NULL);
+}
+
+static void task_uart_write_500ms(void * pvParameters)
+{
+	st_task_msg_data_t l_st_task_msg_data;
+	unsigned short u8_l_write_loop_counter;
+	int u32_l_dummy_load_counter;
+	
+	for(;;)
+	{
+		// param check
+		if(NULL_PTR != pvParameters)
+		{
+			// proper cast
+			l_st_task_msg_data = ( * (st_task_msg_data_t * ) pvParameters);
+			
+			// send message 10 times on UART if available
+			
+			// try capture UART Mutex
+			; // block until taken
+			if(pdTRUE == xSemaphoreTake(gl_semaphore_handle_uart_mutex, portMAX_DELAY))
+			{
+				// write on UART 10 times
+				for(u8_l_write_loop_counter = 0; u8_l_write_loop_counter < 10; u8_l_write_loop_counter++)
+				{
+					while(pdFALSE == vSerialPutString(l_st_task_msg_data.cs_str_msg, l_st_task_msg_data.u8_msg_length));
+					
+					// heavy load simulator per every write
+					for(u32_l_dummy_load_counter = APP_HEAVY_LOAD_CYCLES; u32_l_dummy_load_counter > 0; u32_l_dummy_load_counter--)
+					{
+						// dummy heavy load
+					}
+				}
+				
+				// give mutex back
+				xSemaphoreGive(gl_semaphore_handle_uart_mutex);
+			}
+			
+		}
+		else
+		{
+			// Bad Param
+		}
+		vTaskDelay(APP_TASK_2_MS_DELAY); // delay 500ms
+	}
+	
+	// undefined behavior fail-safe
+	vTaskDelete(NULL);
+}
 
 /* Function to reset timer 1 */
 void timer1Reset(void)
